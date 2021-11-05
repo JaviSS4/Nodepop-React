@@ -9,7 +9,6 @@ function Layout({ children, title, ...props }) {
         <h2 className="layout-title bordered">{title}</h2>
         <section className="layout-content">{children}</section>
       </main>
-      <footer className="layout-footer bordered">© 2021 Keepcoding</footer>
     </div>
   );
 }
