@@ -4,19 +4,26 @@ import AdvertsPage from "./components/adverts/AdvertsPage/AdvertsPage";
 import NewAdvertPage from "./components/adverts/NewAdvertPage/NewAdvertPage";
 import AdvertPage from "./components/adverts/AdvertPage/AdvertPage";
 import { LoginPage } from "./components/auth";
+import { logout } from "./components/auth/LoginPage/service";
+import { AuthContextProvider } from "./components/auth/context";
 
-function App() {
-  const [isLogged, setIsLogged] = useState(false);
+function App({ isInitiallyLogged }) {
+  const [isLogged, setIsLogged] = useState(isInitiallyLogged);
 
   const handleLogin = () => setIsLogged(true);
+  const handleLogout = () => {
+    logout().then(setIsLogged(false));
+  };
 
   return (
-    <div className="app">
-      {/* <AdvertsPage />
+    <AuthContextProvider value={{ isLogged, handleLogin, handleLogout }}>
+      <div className="app">
+        {/* <AdvertsPage />
       <NewAdvertPage />
       <AdvertPage /> */}
-      {isLogged ? <AdvertsPage /> : <LoginPage onLogin={handleLogin} />}
-    </div>
+        {isLogged ? <AdvertsPage /> : <LoginPage />}
+      </div>
+    </AuthContextProvider>
   );
 }
 
