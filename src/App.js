@@ -12,6 +12,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+import PrivateRoute from "./components/auth/PrivateRoute";
 
 function App({ isInitiallyLogged }) {
   const [isLogged, setIsLogged] = useState(isInitiallyLogged);
@@ -26,8 +27,13 @@ function App({ isInitiallyLogged }) {
       <AuthContextProvider value={{ isLogged, handleLogin, handleLogout }}>
         <div className="app">
           <Switch>
-            <Route path="/login" component={LoginPage}></Route>
-            <Route path="/adverts/new" component={NewAdvertPage}></Route>
+            <Route path="/login">
+              {({ history }) => <LoginPage history={history} />}
+            </Route>
+            <PrivateRoute
+              path="/adverts/new"
+              component={NewAdvertPage}
+            ></PrivateRoute>
             <Route path="/adverts/:id" component={AdvertPage}></Route>
             <Route path="/adverts" component={AdvertsPage}></Route>
             <Route exact path="/">
@@ -40,10 +46,6 @@ function App({ isInitiallyLogged }) {
               <Redirect to="/404" />
             </Route>
           </Switch>
-          {/* <AdvertsPage />
-      <NewAdvertPage />
-      <AdvertPage /> */}
-          {/* {isLogged ? <AdvertsPage /> : <LoginPage />} */}
         </div>
       </AuthContextProvider>
     </Router>

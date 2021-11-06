@@ -1,9 +1,9 @@
 import Layout from "../../layout/Layout";
 
-function AdvertPage() {
+function AdvertPage({ match }) {
   return (
     <Layout title="Advert Detail">
-      <div>AdvertPage</div>
+      <div>AdvertPage {match.params.id}</div>
     </Layout>
   );
 }

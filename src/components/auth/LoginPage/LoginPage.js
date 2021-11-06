@@ -3,7 +3,7 @@ import Button from "../../common/Button";
 import { login } from "./service";
 import { AuthContextConsumer } from "../context";
 
-function LoginPage({ onLogin }) {
+function LoginPage({ onLogin, history }) {
   const [value, setValue] = useState({ email: "", password: "" });
   const [checked, setCheck] = useState("");
   const [error, setError] = useState(null);
@@ -25,6 +25,7 @@ function LoginPage({ onLogin }) {
     try {
       await login(value, checked);
       onLogin();
+      history.push("/adverts");
     } catch (error) {
       setError(error);
     }
@@ -70,9 +71,9 @@ function LoginPage({ onLogin }) {
   );
 }
 
-const ConnectedLoginPage = () => (
+const ConnectedLoginPage = (props) => (
   <AuthContextConsumer>
-    {(auth) => <LoginPage onLogin={auth.handleLogin} />}
+    {(auth) => <LoginPage onLogin={auth.handleLogin} {...props} />}
   </AuthContextConsumer>
 );
 
