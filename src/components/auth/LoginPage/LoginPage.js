@@ -1,33 +1,40 @@
 import { useState } from "react";
 import Button from "../../common/Button";
+import { login } from "./service";
 
-function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+function LoginPage({ onLogin }) {
+  const [value, setValue] = useState({ email: "", password: "" });
 
-  const handleChangeEmail = (event) => {
-    setEmail(event.target.value);
+  const handleChange = (event) => {
+    setValue((prevState) => ({
+      ...prevState,
+      [event.target.name]: event.target.value,
+    }));
   };
 
-  const handleChangePassword = (event) => {
-    setPassword(event.target.value);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await login(value);
+    onLogin();
   };
+
   return (
     <div className="loginPage">
       <h1 className="loginPage-title">Log in to Nodepop</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           type="email"
           name="email"
-          value={email}
-          onChange={handleChangeEmail}
+          value={value.email}
+          onChange={handleChange}
         />
         <input
           type="password"
           name="password"
-          value={password}
-          onChange={handleChangePassword}
+          value={value.password}
+          onChange={handleChange}
         />
+        <div>Mantener la sesión iniciada</div>
         <input
           type="checkbox"
           name="checkbox-login"
@@ -35,8 +42,12 @@ function LoginPage() {
           onChange={(event) => console.log(event.target.checked)}
         />
 
-        {/* SACAR EL ARCHIVO DEL TARGET>INPUT>FILES DEL EVENTO event.target.input.files??? <input type="file" onChange={(event) => console.log(event)} /> */}
-        <Button type="submit" variant="primary" disabled={!email || !password}>
+        {/* SACAR EL ARCHIVO DEL TARGET>INPUT>FILES DEL EVENTO event.target.input.current.files??? <input type="file" onChange={(event) => console.log(event)} /> */}
+        <Button
+          type="submit"
+          variant="primary"
+          disabled={!value.email || !value.password}
+        >
           Enter
         </Button>
       </form>
