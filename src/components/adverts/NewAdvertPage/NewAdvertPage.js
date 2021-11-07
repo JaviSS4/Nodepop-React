@@ -2,7 +2,7 @@ import Layout from "../../layout/Layout";
 
 function NewAdvertPage() {
   return (
-    <Layout title="What are you buying? What are you selling?">
+    <Layout title="Create your advert:">
       <div>NewAdvertPage</div>
     </Layout>
   );

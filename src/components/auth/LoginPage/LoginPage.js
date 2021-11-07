@@ -3,7 +3,7 @@ import Button from "../../common/Button";
 import { login } from "./service";
 import { AuthContextConsumer } from "../context";
 
-function LoginPage({ onLogin, history }) {
+function LoginPage({ onLogin, history, location }) {
   const [value, setValue] = useState({ email: "", password: "" });
   const [checked, setCheck] = useState("");
   const [error, setError] = useState(null);
@@ -25,7 +25,8 @@ function LoginPage({ onLogin, history }) {
     try {
       await login(value, checked);
       onLogin();
-      history.push("/adverts");
+      const { from } = location.state || { from: { pathname: "/" } };
+      history.replace(from);
     } catch (error) {
       setError(error);
     }

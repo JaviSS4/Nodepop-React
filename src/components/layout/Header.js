@@ -5,6 +5,7 @@ import { ReactComponent as Icon } from "../../assets/nodepop.svg";
 import { logout } from "../auth/LoginPage/service";
 import AuthContext from "../auth/context";
 import { Link, NavLink } from "react-router-dom";
+import styles from "./Header.css";
 
 function Header({ className }) {
   const { isLogged, handleLogout } = useContext(AuthContext);

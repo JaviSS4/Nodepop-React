@@ -28,23 +28,29 @@ function App({ isInitiallyLogged }) {
         <div className="app">
           <Switch>
             <Route path="/login">
-              {({ history }) => <LoginPage history={history} />}
+              {(routeProps) => <LoginPage {...routeProps} />}
             </Route>
             <PrivateRoute
               path="/adverts/new"
               component={NewAdvertPage}
             ></PrivateRoute>
-            <Route path="/adverts/:id" component={AdvertPage}></Route>
-            <Route path="/adverts" component={AdvertsPage}></Route>
-            <Route exact path="/">
+            <PrivateRoute
+              path="/adverts/:id"
+              component={AdvertPage}
+            ></PrivateRoute>
+            <PrivateRoute
+              path="/adverts"
+              component={AdvertsPage}
+            ></PrivateRoute>
+            <PrivateRoute exact path="/">
               <Redirect to="/adverts" />
-            </Route>
-            <Route path="/404">
+            </PrivateRoute>
+            <PrivateRoute path="/404">
               <div>404 Not found</div>
-            </Route>
-            <Route>
+            </PrivateRoute>
+            <PrivateRoute>
               <Redirect to="/404" />
-            </Route>
+            </PrivateRoute>
           </Switch>
         </div>
       </AuthContextProvider>
