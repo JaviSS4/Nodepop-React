@@ -3,6 +3,7 @@ import Button from "../../common/Button";
 import React, { useEffect } from "react";
 import { useState, useRef } from "react";
 import { createAdvert } from "../service";
+import { Redirect } from "react-router";
 
 function NewAdvertPage() {
   const advert = new FormData();
@@ -12,6 +13,7 @@ function NewAdvertPage() {
   const [price, setPrice] = useState("");
   const [tags, setTags] = useState([]);
   const photo = useRef(null);
+  const [createdId, setCreatedId] = useState("");
 
   const handleName = (event) => {
     setName(event.target.value);
@@ -35,22 +37,19 @@ function NewAdvertPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!photo) {
-      advert.append("name", name);
-      advert.append("sale", sale);
-      advert.append("price", price);
-      advert.append("tags", tags);
-    } else {
-      advert.append("name", name);
-      advert.append("sale", sale);
-      advert.append("price", price);
-      advert.append("tags", tags);
-    }
-
+    advert.append("name", name);
+    advert.append("sale", sale);
+    advert.append("price", price);
+    advert.append("tags", tags);
     try {
-      await createAdvert(advert);
+      const createdAdvert = await createAdvert(advert);
+      setCreatedId(createdAdvert.id);
     } catch (error) {}
   };
+
+  if (createdId) {
+    return <Redirect to={`/adverts/${createdId}`} />;
+  }
 
   return (
     <Layout title="Create your advert:">
@@ -88,7 +87,7 @@ function NewAdvertPage() {
             type="submit"
             className="newAdvert-submit"
             variant="primary"
-            disabled={!name || !sale || !price || !tags}
+            disabled={!name || !sale || !price || !tags[0]}
           >
             Enter
           </Button>

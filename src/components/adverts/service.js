@@ -11,3 +11,13 @@ export const createAdvert = (advert) => {
   const url = `${advertBaseUrl}/adverts`;
   return client.post(url, advert);
 };
+
+export const getAdvert = (id) => {
+  const url = `${advertBaseUrl}/adverts/${id}`;
+  return client.get(url);
+};
+
+export const deleteAdvert = (id) => {
+  const url = `${advertBaseUrl}/adverts/${id}`;
+  return client.delete(url);
+};

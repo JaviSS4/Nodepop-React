@@ -13,6 +13,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import PrivateRoute from "./components/auth/PrivateRoute";
+import Header from "./components/layout/Header";
 
 function App({ isInitiallyLogged }) {
   const [isLogged, setIsLogged] = useState(isInitiallyLogged);
@@ -46,6 +47,7 @@ function App({ isInitiallyLogged }) {
               <Redirect to="/adverts" />
             </PrivateRoute>
             <PrivateRoute path="/404">
+              <Header />
               <div>404 Not found</div>
             </PrivateRoute>
             <PrivateRoute>
