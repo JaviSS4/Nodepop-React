@@ -13,6 +13,7 @@ function AdvertPage({ match, location, history }) {
     photo: null,
   });
   const [error, setError] = useState(null);
+  const [deleting, setDeleting] = useState(true);
 
   useEffect(() => {
     getAdvert(match.params.id)
@@ -20,7 +21,15 @@ function AdvertPage({ match, location, history }) {
       .catch((error) => setError(error));
   }, [match.params.id]);
 
-  const handleDelete = async (event) => {
+  const showConfirm = () => {
+    setDeleting(false);
+  };
+
+  const handleDelete = () => {
+    setDeleting(!deleting);
+  };
+
+  const confirmDelete = async (event) => {
     event.preventDefault();
     try {
       await deleteAdvert(match.params.id);
@@ -64,10 +73,30 @@ function AdvertPage({ match, location, history }) {
           type="delete"
           variant="primary"
           className="delete-advert"
-          onClick={handleDelete}
+          value={false}
+          onClick={showConfirm}
         >
           ELIMINAR ANUNCIO
         </Button>
+        <div hidden={deleting}>
+          <div>¿Estás seguro?</div>
+          <Button
+            type="delete"
+            variant="primary"
+            className="delete-advert-confirmation"
+            onClick={confirmDelete}
+          >
+            SÍ
+          </Button>
+          <Button
+            type="no"
+            className="delete-advert-confirmation"
+            value={true}
+            onClick={handleDelete}
+          >
+            NO
+          </Button>
+        </div>
       </Layout>
     );
   }

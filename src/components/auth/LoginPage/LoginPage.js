@@ -16,7 +16,6 @@ function LoginPage({ onLogin, history, location }) {
   };
 
   const isChecked = (event) => {
-    console.log(event);
     setCheck(event.target.checked);
   };
 

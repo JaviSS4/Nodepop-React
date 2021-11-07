@@ -22,6 +22,7 @@ function AdvertsPage({ history, ...props }) {
   useEffect(() => {
     getLatestAdverts().then(setAdverts);
   }, []);
+
   return (
     <Layout title="What are you buying? What are you selling?" {...props}>
       <div className={styles.advertsPage}>
