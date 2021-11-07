@@ -62,6 +62,7 @@ function LoginPage({ onLogin, history, location }) {
         <Button
           type="submit"
           variant="primary"
+          className="login-submit"
           disabled={!value.email || !value.password}
         >
           Enter
