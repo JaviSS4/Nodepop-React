@@ -1,10 +1,6 @@
-import Layout from "../../layout/Layout";
-import Button from "../../common/Button";
 import React, { Component } from "react";
-import { useState, useRef } from "react";
-import { createAdvert, getLatestAdverts } from "../service";
+import { useState } from "react";
 import "./Filters.css";
-import Slider, { Range } from "rc-slider";
 import "rc-slider/assets/index.css";
 
 function Filters() {
