@@ -5,6 +5,7 @@ import Layout from "../../layout";
 import { Link } from "react-router-dom";
 import Image from "../../common/Image";
 import Button from "../../common/Button";
+import Filters from "../Filters/Filters";
 
 import styles from "./AdvertsPage.module.css";
 
@@ -25,6 +26,7 @@ function AdvertsPage({ history, ...props }) {
 
   return (
     <Layout title="What are you buying? What are you selling?" {...props}>
+      <Filters />
       <div className={styles.advertsPage}>
         {!adverts.length ? (
           <EmptyList />

@@ -12,8 +12,9 @@ function Header({ className }) {
   return (
     <header className={classNames("header", className)}>
       <Link to="/">
+        <div>INICIO</div>
         <div className="header-logo">
-          <Icon width="32" height="32" />
+          <Icon width="40" height="40" />
         </div>
       </Link>
       <nav className="header-nav">
