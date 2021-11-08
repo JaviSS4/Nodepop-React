@@ -17,12 +17,26 @@ const EmptyList = () => (
     </Button>
   </div>
 );
+
 function AdvertsPage({ history, ...props }) {
   const [adverts, setAdverts] = useState([]);
 
   useEffect(() => {
     getLatestAdverts().then(setAdverts);
   }, []);
+
+  /* const FilteredAdverts = adverts.filter(function (advertF) {
+    return (
+      advertF.name === advertFilter.name &&
+      advertF.sale === advertFilter.sale &&
+      advertF.price >= advertFilter.price[0] &&
+      advertF.price <= advertFilter.price[1] &&
+      advertF.tags.filter((item) => !advertFilter.tags.includes(item)) ===
+        advertFilter.tags
+    );
+  });
+
+  console.log(FilteredAdverts); */
 
   return (
     <Layout title="What are you buying? What are you selling?" {...props}>
@@ -32,25 +46,25 @@ function AdvertsPage({ history, ...props }) {
           <EmptyList />
         ) : (
           <ul>
-            {adverts.map((advert) => (
-              <li key={advert.id}>
-                <Link to={`/adverts/${advert.id}`}>
+            {adverts.map((adverts) => (
+              <li key={adverts.id}>
+                <Link to={`/adverts/${adverts.id}`}>
                   {" "}
                   <article className="advert-listed">
-                    <div className="advert-name">{advert.name}</div>
-                    <div className="advert-price">{advert.price}</div>
-                    {advert.sale ? (
+                    <div className="advert-name">{adverts.name}</div>
+                    <div className="advert-price">{adverts.price}</div>
+                    {adverts.sale ? (
                       <div className="advert-sale">VENTA</div>
                     ) : (
                       <div className="advert-sale">COMPRA</div>
                     )}
                     <Image
                       className="advert-img"
-                      src={`http://localhost:3001${advert.photo}`}
+                      src={`http://localhost:3001${adverts.photo}`}
                     />
                     <ul>
-                      {advert.tags.map((tag) => (
-                        <li key={`${advert.id}-${tag}`} className="advert-tag">
+                      {adverts.tags.map((tag) => (
+                        <li key={`${adverts.id}-${tag}`} className="advert-tag">
                           {tag}
                         </li>
                       ))}

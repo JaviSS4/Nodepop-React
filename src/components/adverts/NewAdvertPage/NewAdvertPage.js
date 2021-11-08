@@ -55,6 +55,7 @@ function NewAdvertPage() {
     <Layout title="Create your advert:">
       <div className="newAdvertPage">
         <form onSubmit={handleSubmit}>
+          <label for="name">Name: </label>
           <input
             type="text"
             name="name"
@@ -65,6 +66,8 @@ function NewAdvertPage() {
             <option value="true">VENTA</option>
             <option value="false">COMPRA</option>
           </select>
+
+          <label for="tags">Tags: </label>
           <select
             name="tags"
             multiple={true}
@@ -76,6 +79,7 @@ function NewAdvertPage() {
             <option value="motor">Motor</option>
             <option value="work">Work</option>
           </select>
+          <label for="price">Price: </label>
           <input
             type="text"
             name="price"
